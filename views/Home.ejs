@@ -1,0 +1,39 @@
+<%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
+    <style>
+   
+    
+    </style>
+
+
+    <div class="home">
+        <div class="wrapper">
+            <div class="first p-5">
+                <h1 class=" text-center heading">Discover New Experiences in <br> Blogging World <br><span
+                        class="main-heading "> With Root!</span></h1>
+                <div class="buttons">
+                    <a href="/blog/write">
+                        <button class="main-Btn px-3 py-2"> <b>Get Started</b>
+                        </button>
+                    </a>
+                    <% if(authenticated){ %>
+                        <a href="/blog/blogs">
+                            <button class="main-Btn secondary-Btn px-3 py-2">
+                                <b>Read Blogs</b>
+                            </button>
+                        </a>
+                    <% }else{ %> 
+                    <a href="/signup">
+                        <button class="main-Btn secondary-Btn px-3 py-2">
+                            <b> Sign up</b>
+                        </button>
+                    </a>
+                    <% } %>
+                   
+               
+                </div>
+            </div>
+            <!-- <div class="second">
+                <img src="images/home.png" class="img-responsive" />
+            </div> -->
+        </div>
+    </div>

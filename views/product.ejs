@@ -1,0 +1,43 @@
+<%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
+
+    <div class="category mt-5">
+        <h1>This product page</h1>
+        <form action="/product/63469ecfaf5c681e86163dad" method="POST">
+            <input type="number" name="rating">
+            <textarea name="review" rows="4" cols="50">
+
+            </textarea>
+            <button type="submit">Send Review</button>
+        </form>
+        <h1>edit form</h1>
+        <form action="/product/edit/63469ecfaf5c681e86163dad" method="POST">
+            <input type="number" name="rating">
+            <textarea name="review" rows="4" cols="50">
+
+            </textarea>
+            <button type="submit">Edit Review</button>
+        </form>
+        <br>
+        <h1>product</h1>
+        <%= product %>
+        <br>
+        <h1>authenticated</h1>
+        <%= authenticated %>
+        <br>
+        <h1>all reviews</h1>
+        <%= reviews %>
+        <br>
+        <h1>current user review</h1>
+        <%= currentUserReview %>
+        <h1>delete my review</h1>
+        <button class="" id="deleteBtn">Delete</button>
+
+
+    </div>
+<script>
+    var delBtn = document.getElementById('deleteBtn');
+    delBtn.addEventListener('click',()=>{
+    fetch('/product/63469ecfaf5c681e86163dad',{method:'DELETE'}).then(()=>{console.log('deleted')}).catch(e=>{console.log(e)})
+    window.location.reload();
+    })
+</script>

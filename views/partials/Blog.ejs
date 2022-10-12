@@ -1,0 +1,133 @@
+<style>
+    .blogContainer {
+        padding-top: 40px;
+        background-color: #f3f4f6;
+        width: 700px;
+        max-width: 100vw;
+
+        border-radius: 10px;
+       
+
+    }
+
+    .blogContainer:hover {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    }
+
+    
+
+    .blogContainer a,
+    a:hover,
+    a:focus,
+    a:active {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .blogContainer .profileContainer {
+        display: flex;
+        align-items: center;
+        padding: 10px 5px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.178);
+        font-family: 'Inter', sans-serif;
+    }
+    .blogContainer .profileContainer:hover{
+        background-color:#e8e8eb;
+    }
+    
+
+    .blogContainer .profileContainer .img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 0 2px #6262936c;
+    }
+
+    .blogContainer .profileContainer .img img {
+        object-fit: contain;
+        width: 40px;
+        height: 40px;
+
+    }
+    .blogContainer .profileContainer h5{
+        color:rgba(65, 62, 62, 0.699) !important;
+    }
+    .blogContainer .heading{
+
+ font-family: 'Inter', sans-serif;
+    }
+    .blogContainer .profileInfo{
+        width:100%;
+        display:flex;
+        justify-content:space-between;
+    }
+    .blogContainer .icons  i{
+       font-size:18px;
+       cursor: pointer;
+    }
+</style>
+<% var date = blog.createdAt;
+var month = ["January", "February", "March", "April", "May", "June",
+"July", "August", "September", "October", "November", "December"][date.getMonth()]
+var year = date.getFullYear();
+var Date= date.getDate();
+date= `${Date} ${month} ${year}`;
+%>
+<div class="blogContainer my-4 p-2">
+    <a href="/user/<%= blog.author._id %>">
+        <div class="profileContainer">
+            <div class="img">
+                <img src="<%= blog.author.image %>" alt="<%= blog.author.fullName%>" referrerpolicy="no-referrer">
+
+            </div>
+            <div class="profileInfo">
+                <h5 class="mx-2 my-0 heading ">
+                    <%= blog.author.fullName %>
+                </h5>
+                <div class="icons">
+                    <% if (blog.author._id==user){ %>
+                    <a href="/blog/edit/<%= blog._id %>">
+                        <i class="fa-solid fa-pen-to-square mx-2 primaryColor"></i> 
+                    </a>
+                  
+                        <i class="fa-solid fa-trash mx-2 primaryColor"
+                        onClick='showAlert("<%=blog._id %>")'
+                        ></i>    
+                    <% } %>
+                </div>
+               
+                
+            </div>
+           
+
+        </div>
+    </a>
+    <a href="/blog/<%= blog._id %>">
+        <div class="content p-3">
+            <h5 class="heading blogTitle m-1">
+                <%= blog.title %>
+            </h5>
+            <p class="m-1">
+                <%= blog.shortDescription %>
+
+            </p>
+            <p class="text-secondary m-1"><%= date %></p>
+        </div>
+    </a>
+
+
+
+</div>
+<script>
+function showAlert(id){
+     let text= "Do you want to Delete?"
+     if(confirm(text)==true){
+        fetch(`/blog/delete/${id}`,{method:'DELETE'})
+    .then(() =>{console.log('blog deleted');
+    window.location.reload(1);
+});
+     }
+
+}
+</script>

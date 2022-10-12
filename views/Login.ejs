@@ -1,0 +1,40 @@
+<%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
+    <style>
+        .login .wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #9e9ebe18;
+        }
+
+        .login .box {
+            width: 400px;
+            max-width: 400px;
+            min-height: 200px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        }
+    </style>
+    <div class="login">
+        <div class="wrapper">
+
+            <div class="box">
+                <h2 class=" text-center pt-5 primaryColor">Welcome to Root!</h2>
+                <div class="col s12 m6 offset-m3 center-align">
+    
+                    <div class="pt-4 container d-flex justify-content-center">
+                        <a href="/auth/google">
+                            <button class="main-Btn px-3 py-2 secondary-Btn">
+                                <img width="20px" style=" margin-right:8px" alt="Google sign-in"
+                                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
+                                Sign in with Google
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+    </div>
+   
