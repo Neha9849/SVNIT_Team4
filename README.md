@@ -45,7 +45,7 @@ Tech Stack used
 ![image](https://user-images.githubusercontent.com/85057583/195579200-3d1dfb4a-8cb3-4611-8054-faced9792349.png)
 ![image](https://user-images.githubusercontent.com/85057583/195579244-883c37de-9c8f-41ce-8d02-f5a89b7512ed.png)
 ![image](https://user-images.githubusercontent.com/85057583/195579318-46c46200-86e1-4f95-93d7-ee41420ad12b.png)
-![image](https://user-images.githubusercontent.com/85057583/195579396-f9aa7f79-344f-4708-b8ea-c606f4ba52fd.png)
+
 
 
 
