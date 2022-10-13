@@ -35,3 +35,23 @@ Tech Stack used
 4.	Bootstrap
 5.	HTML/CSS
 6. EJS
+
+## images![Screenshot (324)](https://user-images.githubusercontent.com/85057583/195578785-f0c56c27-2867-45dd-bfbd-5c2435ec186f.png)
+![Screenshot (325)](https://user-images.githubusercontent.com/85057583/195578814-2eda69f5-e02c-47dc-8023-c35ff6f0900b.png)
+![image](https://user-images.githubusercontent.com/85057583/195578945-d4203fa0-2533-477d-bc24-63322a8cf28b.png)
+![image](https://user-images.githubusercontent.com/85057583/195579014-0b1fcfdc-83ab-42d5-b911-ecddacd3e997.png)
+![image](https://user-images.githubusercontent.com/85057583/195579054-dbff4c5a-5697-4bfd-8316-09fde190ecd4.png)
+![image](https://user-images.githubusercontent.com/85057583/195579095-0719389c-810c-491e-8040-3293d7b9ffe0.png)
+![image](https://user-images.githubusercontent.com/85057583/195579200-3d1dfb4a-8cb3-4611-8054-faced9792349.png)
+![image](https://user-images.githubusercontent.com/85057583/195579244-883c37de-9c8f-41ce-8d02-f5a89b7512ed.png)
+![image](https://user-images.githubusercontent.com/85057583/195579318-46c46200-86e1-4f95-93d7-ee41420ad12b.png)
+![image](https://user-images.githubusercontent.com/85057583/195579396-f9aa7f79-344f-4708-b8ea-c606f4ba52fd.png)
+
+
+
+
+
+
+
+
+
