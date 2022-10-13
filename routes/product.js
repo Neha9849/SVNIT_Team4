@@ -21,7 +21,7 @@ router.get('/:id', (req, res) => {
 
           .then((reviews) => {
             //check current user gave review or not
-            let currentUserReview
+            let currentUserReview =null
             Review.find({ product: product._id, author: req.user.id }).then(
               (review) => {
                 if (review) {
@@ -58,7 +58,7 @@ router.get('/:id', (req, res) => {
 //post a review
 router.post('/:id', ensureAuth, (req, res) => {
   const { rating, review } = req.body
-  Review.findOne({ author: req.user._id }).then((user) => {
+  Review.findOne({product:req.params.id, author: req.user._id }).then((user) => {
     if (user) {
       //already sent review
       console.log('you already reviewed')
@@ -76,9 +76,10 @@ router.post('/:id', ensureAuth, (req, res) => {
             oldRatingArray = [...oldRatingArray,rating]
             let sum=0;
             oldRatingArray.forEach(rating =>{
-             sum=sum+rating
+             sum=Number(sum)+Number(rating)
             }
               )
+              sum= sum+rating / (oldRatingArray.length+1);
             Product.findByIdAndUpdate(req.params.id,{rating:oldRatingArray,avgRating:sum}).then((updated)=>{
               console.log('avg rating updated')
             }).catch((error) => {console.log(error)});
@@ -100,9 +101,11 @@ router.post('/edit/:id', (req, res) => {
   const { rating, review } = req.body
   Review.findOneAndUpdate({ author: req.user.id }, { rating, review })
     .then((review) => {
+      console.log('updated')
       res.redirect(`/product/${req.params.id}`)
     })
     .catch((error) => {
+      console.log('something wrng while update')
       res.status(404).json({message:"something went wrong"})
     })
 })
@@ -113,6 +116,7 @@ router.delete('/:id', ensureAuth, (req, res) => {
 
   Review.findOneAndDelete({ author: req.user.id })
     .then((review) => {
+      res.redirect(`/product/${req.params.id}`)
      console.log('deleted')
     })
     .catch((error) => {

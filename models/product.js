@@ -20,7 +20,7 @@ const ProductSchema = new mongoose.Schema({
     required: true,
   },
   avgRating:{
-    type: Number,
+    type:  Number,
   },
   category: {
     type: String,

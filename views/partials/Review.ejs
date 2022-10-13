@@ -1,34 +1,116 @@
 <style>
-    .cont{
-        max-width:900px;
+    .cont {
+        max-width: 900px;
+        border: 1px solid var(--border);
     }
-    .profile{
+
+    .profile {
         min-width: 400px;
+    }
+
+    .icon {
+        font-size: 20px;
     }
 </style>
 <div class="cont">
     <div class="cont-top">
         <div class="profile">
+
             <div class="prf-img">
                 <img src="<%=review.author.image %>" alt="">
             </div>
             <div class="prf-name">
-                <strong class="hSecondary"><%=review.author.name %></strong>
-                <p id="prf-date"><%= review.updatedAt.toDateString() %></p>
+                <strong class="hSecondary">
+                    <%=review.author.name %>
+                </strong>
+                <p id="prf-date">
+                    <%= review.updatedAt.toDateString() %>
+                </p>
             </div>
         </div>
-        <div class="rating">
-
-            <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
-            <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
-            <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
-            <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
-            <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
-
+        <div class="fnxBtns">
+          
+            <span class="icon m-1 tsecondary" data-bs-toggle="modal" data-bs-target="#editModel"><i
+                class="fa-solid fa-pen-to-square"></i></span>
+        <span class="text-danger icon m-1" data-bs-toggle="modal" data-bs-target="#deleteModel"><i
+                class="fa-solid fa-trash"></i></span>
+           
+               
+         
+          
         </div>
+
+    </div>
+    <div class="rating">
+
+        <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+        <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+        <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+        <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+        <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+
     </div>
 
     <div class="comments">
-        <p><%= review.review %></p>
+        <p>
+            <%= review.review %>
+        </p>
     </div>
 </div>
+
+<!-- edit review model -->
+<div class="modal" id="editModel" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Edit your Review</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/product/edit/<%= product._id %> " method="POST">
+                <div class="modal-body">
+                    <input type="number" name="rating" value="<%=review.rating %>">
+                    <br>
+                    <textarea name="review" rows="4" cols="50">
+                        <%= review.review %>
+        </textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btnSecondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btnPrimary">Edit Review</button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- delete review model -->
+<div class="modal" id="deleteModel" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Are you sure you want to delete?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body"> On deleting your review will be permanently removed</div>
+
+
+            <div class="modal-footer">
+                <button type="button" class="btn btnSecondary btn-error" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btnPrimary" id="delete">Delete</button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script>
+    var dltBtn = document.getElementById('delete');
+    dltBtn.addEventListener('click', () => {
+      
+        fetch('/product/<%= product._id %>', { method: 'DELETE' }).then(() => { console.log('deleted') }).catch(e => { console.log(e) })
+      
+    })
+</script>

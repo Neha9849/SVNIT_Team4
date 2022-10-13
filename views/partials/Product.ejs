@@ -1,3 +1,11 @@
+<style>
+    .productCard {
+        min-width: 300px;
+    }
+    .imgContainer {
+        width:300px;
+    }
+</style>
 <div class="productCard px-5 py-5">
     <a href="/product/<%= product._id %>">
         <div class="card">
@@ -16,8 +24,12 @@
                 <div class="cardDetails py-2">
                     <div>
                         <span class="rating">
-                            <%= product.rating %>0★
-                        </span> <span class="review_num tsecondary">(684)</span>
+                            <% let sum = product.rating.reduce((partialSum, a) => partialSum + a, 0);
+                              sum = sum / product.rating.length
+                              isNaN(sum)?sum=0:sum=sum
+                              %>
+                            <%= sum %>★
+                        </span> <span class="review_num tsecondary">(<%= product.rating.length %>)</span>
                     </div>
                     <div>
                         <b>₹ <%= product.prize %></b>

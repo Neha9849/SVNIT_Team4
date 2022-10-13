@@ -182,7 +182,7 @@
             width: 90%;
             box-shadow: 10px 10px 10px var(--shadow);
             background-color: var(--secondary);
-            padding: 20px;
+            padding: 0px 20px;
             margin: 15px;
             cursor: pointer;
             border-radius: 10px;
@@ -223,7 +223,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 3px;
             flex-wrap: wrap;
         }
 
@@ -251,6 +250,7 @@
     <div class="container">
         <div class="wrapper">
             <div class="product-box m-2 p-2">
+                
                 <div class="main-image">
                     <img src="<%=product.image %>" id="imagebox">
                 </div>
@@ -260,7 +260,11 @@
                     <%= product.title %>
                 </h2>
                 <div class="review">
-                    <span>4.0</span>
+                    <% let sum = product.rating.reduce((partialSum, a) => partialSum + a, 0);
+                    sum = sum / product.rating.length
+                    isNaN(sum)?sum=0:sum=sum
+                    %>
+                    <span><%= sum %> </span>
                     <span class="fa fa-star"></span>
                 </div>
 
@@ -292,35 +296,44 @@
     </div>
 
     <div class="desc">
-        <h3 >About the product</h3>
+        <h3>About the product</h3>
         <p class="tsecondary">
-           <%= product.description %> 
+            <%= product.description %>
         </p>
     </div>
 
     <section class="display-rev">
         <div class="dis-head">
             <h3>Customer ratings and reviews</h3>
-         
-          
         </div>
 
         <div class="rev-content">
-            <% if (currentUserReview) { %>
-                <button class="btn btnSecondary" data-bs-toggle="modal" data-bs-target="#sendReviewModel">Add a review</button>
-            <% } %>
-            <% reviews.forEach(review=> { %>
-                <%- include('partials/Review.ejs',{review}) %>
+            <% if (currentUserReview.length==0) { %>
+                <button class="btn btnSecondary" data-bs-toggle="modal" data-bs-target="#sendReviewModel">Add a
+                    review</button>
+                <% } %>
+                    <% if (reviews.length==0) { %>
+                        <h5 class="tsecondary m-5 p-5">No reviews to show</h5>
+                     
+                    <% } %>
+                    <% reviews.forEach(review=> { %>
+                        <% if (currentUserReview._id==review._id) { %>
+                           
+                           
+                            <%- include('partials/Review.ejs',{review,display:true}) %>
 
-                    <% }) %>
 
+                                <% } else{%>
+                                  
+                                    <%- include('partials/Review.ejs',{review,display:false}) %>
+                                    <% } %> 
 
-
+                                    <% }) %>
         </div>
     </section>
 
     <section class="wrt-rev">
-        <div class="dis-head">
+        <!-- <div class="dis-head">
             <h1>Rate this app</h1>
             <p>Tell others what you think</p>
         </div>
@@ -344,23 +357,31 @@
                 <span class="fa fa-shopping-cart"></span>
                 Add review
             </button>
-        </div>
+        </div> -->
 
-<!-- send review model -->
-<div class="modal" id="sendReviewModel" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Modal title</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <!-- send review model -->
+        <div class="modal" id="sendReviewModel" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Review this product</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="/product/<%= product._id %> " method="POST">
+                        <div class="modal-body">
+                            <input type="number" name="rating">
+                            <br>
+                            <textarea name="review" rows="4" cols="50">
+
+                </textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btnSecondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btnPrimary">Send Review</button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>Modal body text goes here.</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
