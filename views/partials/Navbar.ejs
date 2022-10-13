@@ -1,74 +1,47 @@
 <style>
-.nav{
-    min-height:50px;
-    width:100%;
-    background-color:#6f6f93;
-    color:white;
-    position:fixed;
-    top:0;
-    z-index: 100;
-}
-.nav .navInner{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
-.nav h4{
-    font-family: cursive !important;
-    color:white !important;
-}
-.nav ul{
-    padding-top:10px;
-    display:flex;
-}
-.nav li{
-    display: block;
-    margin: 0 20px;
-    font-size: large;
-}
-.nav a{
-  
-    color:white;
-    text-decoration: none;
-}
-.nav a:hover{
-       color:#3c3c4e
-}
+    .navbar {
+        background-color: var(--secondary) !important;
+        border: 1px solid var(--border)
+    }
+
+    .navbar-toggler:focus {
+        box-shadow: none !important;
+    }
 </style>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand hSecondary">
+            Exclsv.com</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+            <div class="navbar-nav">
 
-<div class="nav">
-   <div class="navInner w-100">
-       <div class="left mx-5">
-           <a href="/">
-            <h4 >Root</h4>
-           </a>
-       
-       </div>
-       <div class="right mx-3">
-          
-            <ul class="font-monospace">
-                <a href="/products">
-                    <li>Products</li>
-                </a>
+            </div>
+
+
+            <div class="navbar-nav">
+                <button class="btn btnPrimary mx-2 my-1">
+                    Shop Now
+                </button>
                 <% if(authenticated){ %>
-                <a href="/dashboard">
-                    <li><i class="fa-solid fa-user"></i></li>
-                </a>
-                <% }else{ %>
-                    <a href="/signup">
-                            <li class="signupLink">
-                                Signup
-                            </li> 
+                    <a href="/dashboard">
+                        <button class="btn btnSecondary mx-2 my-1">
+                            <b>Dashboard</b>
+                        </button>
                     </a>
-                <% } %>
 
+                    <% }else{ %>
+                        <a href="/signup">
+                            <button class="btn btnSecondary mx-2 my-1">
+                                <b>Signup</b>
 
-            </ul>
-           
+                            </button>
+                        </a>
 
-
-       </div>
-     
-   </div>
-</div>
+                        <% } %>
+            </div>
+        </div>
+    </div>
+</nav>

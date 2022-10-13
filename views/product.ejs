@@ -1,43 +1,366 @@
 <%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
+    <link rel="stylesheet" href="../../css/style.css">
+    <style>
+        /* main */
+        .container {
+            width: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    <div class="category mt-5">
-        <h1>This product page</h1>
-        <form action="/product/63469ecfaf5c681e86163dad" method="POST">
-            <input type="number" name="rating">
-            <textarea name="review" rows="4" cols="50">
+        .wrapper {
+            width: 90%;
+            height: auto;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
 
-            </textarea>
-            <button type="submit">Send Review</button>
-        </form>
-        <h1>edit form</h1>
-        <form action="/product/edit/63469ecfaf5c681e86163dad" method="POST">
-            <input type="number" name="rating">
-            <textarea name="review" rows="4" cols="50">
+        @media screen and (max-width:700) {
 
-            </textarea>
-            <button type="submit">Edit Review</button>
-        </form>
-        <br>
-        <h1>product</h1>
-        <%= product %>
-        <br>
-        <h1>authenticated</h1>
-        <%= authenticated %>
-        <br>
-        <h1>all reviews</h1>
-        <%= reviews %>
-        <br>
-        <h1>current user review</h1>
-        <%= currentUserReview %>
-        <h1>delete my review</h1>
-        <button class="" id="deleteBtn">Delete</button>
+            .wrapper .product-box {
+                min-width: 300px;
+            }
+
+            .wrapper .content {
+                min-width: 300px;
+            }
+        }
 
 
+        .text {
+            flex-basis: 45%;
+        }
+
+        .all-images {
+            height: 20vh;
+            display: flex;
+        }
+
+        .main-image {
+            height: 300px;
+            width: 400px;
+        }
+
+        .main-image img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 35px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .review {
+            background-color: green;
+            display: inline-block;
+            color: #fff;
+            padding: 4px;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        review .fa {
+            counter-reset: #fff;
+        }
+
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: left;
+        }
+
+        .rating>input {
+            display: none;
+        }
+
+        .rating>label {
+            position: relative;
+            width: 20px;
+            font-size: 5vh;
+            color: #FFD700;
+            cursor: pointer;
+        }
+
+        .rating>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+
+        .rating>label:hover:before,
+        .rating>label:hover~label:before {
+            opacity: 1 !important;
+        }
+
+        .rating>input:checked~label:before {
+            opacity: 1;
+        }
+
+        .rating:hover>input:checked~label:before {
+            opacity: 0.4;
+        }
+
+        .price {
+            color: #555;
+            font-size: 26px;
+            font-weight: bold;
+            padding-top: 10px;
+            padding-right: 10px;
+        }
+
+        .price-box {
+            display: flex;
+            align-items: center;
+        }
+
+        input {
+            width: 30px;
+            border: 1px solid #ccc;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        button {
+            width: 140px;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+            border: 0;
+            border-radius: 5px;
+            padding: 10px 15px;
+            background-color: tomato;
+            box-sizing: border-box;
+            cursor: pointer;
+
+        }
+
+        button .fa {
+            margin-right: 10px;
+        }
+
+        /*Description head*/
+        .dis-head {
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Description */
+        .desc {
+            max-width: 800px;
+            height: auto;
+            margin: auto;
+            padding: 5px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .desc h3 {
+            color: var(--text);
+            margin: 2px;
+        }
+
+        .rev-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cont {
+            width: 90%;
+            box-shadow: 10px 10px 10px var(--shadow);
+            background-color: var(--secondary);
+            padding: 20px;
+            margin: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .prf-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+
+        .prf-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+        }
+
+        .prf-name {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .prf-name strong {
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+
+        .cont-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3px;
+            flex-wrap: wrap;
+        }
+
+        .comments {
+            font-size: 0.9rem;
+        }
+
+        /* Write review */
+        .wrt-main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: var(--secondary);
+            width: 90%;
+            margin: auto;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .wrt-area {
+            background-color: var(--secondary);
+        }
+    </style>
+    <div class="container">
+        <div class="wrapper">
+            <div class="product-box m-2 p-2">
+                <div class="main-image">
+                    <img src="<%=product.image %>" id="imagebox">
+                </div>
+            </div>
+            <div class="content m-2 p-2">
+                <h2>
+                    <%= product.title %>
+                </h2>
+                <div class="review">
+                    <span>4.0</span>
+                    <span class="fa fa-star"></span>
+                </div>
+
+                <div class="rating">
+
+                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+
+                </div>
+
+                <div class="price-box">
+                    <p class="price">&#8377; <%= product.prize %>
+                    </p>
+                    <strike class="tsecondary">&#8377; <%= product.prize +1000 %></strike>
+                </div>
+                <button class="btn btnPrimary m-1 ">
+                    <span class="fa fa-shopping-cart"></span>
+                    Add
+                </button>
+                <button class="btn btnSecondary m-1 ">
+                    <span class="fa fa-shopping-cart"></span>
+                    Buy now
+                </button>
+            </div>
+        </div>
     </div>
-<script>
-    var delBtn = document.getElementById('deleteBtn');
-    delBtn.addEventListener('click',()=>{
-    fetch('/product/63469ecfaf5c681e86163dad',{method:'DELETE'}).then(()=>{console.log('deleted')}).catch(e=>{console.log(e)})
-    window.location.reload();
-    })
-</script>
+
+    <div class="desc">
+        <h3 >About the product</h3>
+        <p class="tsecondary">
+           <%= product.description %> 
+        </p>
+    </div>
+
+    <section class="display-rev">
+        <div class="dis-head">
+            <h3>Customer ratings and reviews</h3>
+         
+          
+        </div>
+
+        <div class="rev-content">
+            <% if (currentUserReview) { %>
+                <button class="btn btnSecondary" data-bs-toggle="modal" data-bs-target="#sendReviewModel">Add a review</button>
+            <% } %>
+            <% reviews.forEach(review=> { %>
+                <%- include('partials/Review.ejs',{review}) %>
+
+                    <% }) %>
+
+
+
+        </div>
+    </section>
+
+    <section class="wrt-rev">
+        <div class="dis-head">
+            <h1>Rate this app</h1>
+            <p>Tell others what you think</p>
+        </div>
+
+        <div class="wrt-main">
+            <div class="rating">
+
+                <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+
+            </div>
+
+            <div class="wrt-cont">
+                <textarea class="wrt-area"></textarea>
+            </div>
+
+            <button>
+                <span class="fa fa-shopping-cart"></span>
+                Add review
+            </button>
+        </div>
+
+<!-- send review model -->
+<div class="modal" id="sendReviewModel" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>

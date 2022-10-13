@@ -1,0 +1,35 @@
+<div class="productCard px-5 py-5">
+    <a href="/product/<%= product._id %>">
+        <div class="card">
+            <!-- img of product -->
+            <div class="imgContainer">
+                <img src="<%= product.image %>" alt="product">
+            </div>
+
+            <div class="card-body">
+                <!-- title -->
+                <h5 class="card-title ">
+                    <%= product.title %>
+                </h5>
+                <!-- desc -->
+                <!-- desc will be trimmed -->
+                <div class="cardDetails py-2">
+                    <div>
+                        <span class="rating">
+                            <%= product.rating %>0★
+                        </span> <span class="review_num tsecondary">(684)</span>
+                    </div>
+                    <div>
+                        <b>₹ <%= product.prize %></b>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </a>
+
+
+</div>

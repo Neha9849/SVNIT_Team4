@@ -1,8 +1,9 @@
 <%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
+<link rel="stylesheet" href="/../css/style.css">
     <style>
         .login .wrapper {
             width: 100vw;
-            height: 100vh;
+            min-height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -22,12 +23,12 @@
         <div class="wrapper">
 
             <div class="box">
-                <h2 class=" text-center pt-5 primaryColor">Welcome to Root!</h2>
+                <h2 class=" text-center pt-5 primaryColor">Welcome to Exclsv.com</h2>
                 <div class="col s12 m6 offset-m3 center-align">
     
                     <div class="pt-4 container d-flex justify-content-center">
                         <a href="/auth/google">
-                            <button class="main-Btn px-3 py-2 secondary-Btn">
+                            <button class="main-Btn px-3 py-2 secondary-Btn btnSecondary">
                                 <img width="20px" style=" margin-right:8px" alt="Google sign-in"
                                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
                                 Sign in with Google

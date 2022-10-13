@@ -1,8 +1,93 @@
 <%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
-   
-    <div class="category mt-5">
-    
-     <h1>this is products page</h1>
-     <%= products %>
+    <link rel="stylesheet" href="../../css/style.css">
+
+    <div id="wrapper" class="toggled">
+
+        <section class="sidebar">
+           
+            <div id="sidebar-wrapper">
+                <ul class="sidebar-nav">
+                    <li>
+                        <b>Categories</b>
+                        <p>Appliances</p>
+                        <p>Western wear</p>
+                        <p>Electronics</p>
+                        <form action="/">
+                           
+                            <label for="customRange1" class="form-label">Price range</label>
+                            <input type="range" class="price-form-range form-range" min="0" max="5" step="0"
+                                id="customRange1" onchange="updatePriceRange(this.value)">
+                            Price: <span class="price-range"></span>
+                            <hr>
+                           
+                            <label for="customRange1" class="form-label">ratings</label>
+                            <input type="range" class="rating-form-range form-range" min="0" max="5" id="customRange1"
+                                onchange="updateRatingRange(this.value)">
+                            Rating: <span class="rating-range"></span>
+                            <hr>
+                            
+                            <label></label>
+                            <select class="sort-by form-select" aria-label="default select example">
+                                <option disabled>Sort by</option>
+                                <option value="1">Newest</option>
+                                <option value="2">Oldest</option>
+                            </select>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+
+
+        <div class="cat-title">
+            <div></div>
+            <button class="btn btnSecondary" id="menu-toggle">Filter<i class="fa-solid fa-bars-filter"></i></button>
+          
+        </div>
+          
+       
+
+
+
+        <!-- products -->
+        <div class="productsBox">
+
+            <% products.forEach(( product)=> { %>
+                <%- include('partials/Product.ejs',{product: product}) %>
+                    <%- include('partials/Product.ejs',{product: product}) %>
+                        <%- include('partials/Product.ejs',{product: product}) %>
+                            <%- include('partials/Product.ejs',{product: product}) %>
+                            <%- include('partials/Product.ejs',{product: product}) %>
+                            <%- include('partials/Product.ejs',{product: product}) %>
+                                <% }) %>
+
+
+        </div>
     </div>
-   
+
+
+    <script>document.querySelector("#menu-toggle").addEventListener("click", function (e) {
+            e.preventDefault();
+            if (document.querySelector("#wrapper").classList.contains("toggled")) {
+                document.querySelector("#wrapper").classList.remove("toggled");
+            } else {
+                document.querySelector("#wrapper").classList.add("toggled");
+            }
+        });
+
+
+        // FILTERS FUNCTIONS 
+
+        // default price and rating
+        document.querySelector(".price-range").innerHTML = document.querySelector(".price-form-range").value
+        document.querySelector(".rating-range").innerHTML = document.querySelector(".rating-form-range").value
+
+        // function for price change
+        function updatePriceRange(val) {
+            document.querySelector(".price-range").innerHTML = val
+        }
+        // function for rating change
+        function updateRatingRange(val) {
+            document.querySelector(".rating-range").innerHTML = val
+        }</script>
