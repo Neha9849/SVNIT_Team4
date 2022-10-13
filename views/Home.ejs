@@ -82,9 +82,22 @@
             <b>Shop Now</b>
           </button>
         </a>
-         
-          
-            <button class="btn btnSecondary mx-3">Host Rooms</button>
+        <% if(authenticated){ %>
+          <a href="/dashboard">
+              <button class="btn btnSecondary mx-2 my-1">
+                  <b>Dashboard</b>
+              </button>
+          </a>
+
+          <% }else{ %>
+              <a href="/signup">
+                  <button class="btn btnSecondary mx-2 my-1">
+                      <b>Signup</b>
+
+                  </button>
+              </a>
+
+              <% } %>
       
         </div>
       </div>

@@ -13,6 +13,19 @@
         .carousel-inner>.item>img {
             margin: 0 auto;
         }
+        .card{
+            max-width:50vw !important;
+        }
+        .categories{
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a{
+            all:unset !important;
+          cursor: pointer !important;
+        }
     </style>
     <section id="carousel">
 
@@ -40,3 +53,25 @@
         </div>
        
     </section>
+    <div class="categories">
+        <a href="/categories/electronics">
+            <div class="card m-5" style="width: 18rem;">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cHJvZHVjdHxlbnwwfHwwfHw%3D&w=1000&q=80" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <p class="card-text">Electronics</p>
+                </div>
+              </div>
+        </a>
+        <a href="clothing">
+            <div class="card" style="width: 18rem;">
+                <div class="imgc">
+                    <img src="https://cdn.shopify.com/s/files/1/0420/7073/7058/collections/Snitch_17thOct21_2393_b324dc9c-6681-4ad8-9538-0ad6dcc5d666_400x.jpg?v=1659593231" class="card-img-top" alt="...">
+                </div>
+              
+                <div class="card-body">
+                  <p class="card-text">Clothing</p>
+                </div>
+              </div>
+        </a>
+          
+    </div>
