@@ -246,11 +246,12 @@
         .wrt-area {
             background-color: var(--secondary);
         }
+        
     </style>
     <div class="container">
         <div class="wrapper">
             <div class="product-box m-2 p-2">
-                
+
                 <div class="main-image">
                     <img src="<%=product.image %>" id="imagebox">
                 </div>
@@ -260,12 +261,14 @@
                     <%= product.title %>
                 </h2>
                 <div class="review">
-                    <% let sum = product.rating.reduce((partialSum, a) => partialSum + a, 0);
-                    sum = sum / product.rating.length
-                    isNaN(sum)?sum=0:sum=sum
-                    %>
-                    <span><%= sum %> </span>
-                    <span class="fa fa-star"></span>
+                    <% let sum=product.rating.reduce((partialSum, a)=> partialSum + a, 0);
+                        sum = sum / product.rating.length
+                        isNaN(sum)?sum=0:sum=sum
+                        %>
+                        <span>
+                            <%= sum %>
+                        </span>
+                        <span class="fa fa-star"></span>
                 </div>
 
                 <div class="rating">
@@ -306,6 +309,27 @@
         <div class="dis-head">
             <h3>Customer ratings and reviews</h3>
         </div>
+        <div class="dis-options rev-content">
+            <div>
+                <button class="dis-button btn btnSecondary" type="submit" id="sort-date-new">
+                    Recent
+                </button>
+    
+                <button class="dis-button btn btnSecondary" type="submit" id="sort-date-old">
+                   Old
+                </button>
+    
+                <button class="dis-button btn btnSecondary" type="submit" id="sort-date-rat">
+                    top
+                </button>
+            </div>
+            
+
+            <form class="d-flex flexc m-2" role="search" id="search-form">
+                <input class="form-control me-2" type="search" placeholder="Search tags" id="form-in" >
+                <button class="btn btnPrimary" type="button" id="search-button">Search</button>
+            </form>
+        </div>
 
         <div class="rev-content">
             <% if (currentUserReview.length==0) { %>
@@ -314,21 +338,21 @@
                 <% } %>
                     <% if (reviews.length==0) { %>
                         <h5 class="tsecondary m-5 p-5">No reviews to show</h5>
-                     
-                    <% } %>
-                    <% reviews.forEach(review=> { %>
-                        <% if (currentUserReview._id==review._id) { %>
-                           
-                           
-                            <%- include('partials/Review.ejs',{review,display:true}) %>
+
+                        <% } %>
+                            <% reviews.forEach(review=> { %>
+                                <% if (currentUserReview._id==review._id) { %>
 
 
-                                <% } else{%>
-                                  
-                                    <%- include('partials/Review.ejs',{review,display:false}) %>
-                                    <% } %> 
+                                    <%- include('partials/Review.ejs',{review,display:true}) %>
 
-                                    <% }) %>
+
+                                        <% } else{%>
+
+                                            <%- include('partials/Review.ejs',{review,display:false}) %>
+                                                <% } %>
+
+                                                    <% }) %>
         </div>
     </section>
 
@@ -385,3 +409,47 @@
                 </div>
             </div>
         </div>
+
+
+
+        <!-- <script>
+            let searchBtn = document.getElementById('search-button');
+            //console.log(searchBtn);
+
+            searchBtn.addEventListener("click", function (e) {
+                //console.log("clicked");
+                let searchWord = document.getElementById('form-in');
+                let val = searchWord.value.toUpperCase();
+                let dbArray = <%= reviews %>;
+                //console.log(dbArray)
+
+                Array.from(dbArray).forEach(function (element) {
+                    //console.log(element);
+                    let textMain = element.getElementsByClassName("comments")[0].innerHTML.toString().toUpperCase();
+                    console.log(textMain);
+                    if (textMain.includes(val)) {
+                        element.style.display = "block";
+                    }
+                    else {
+                        element.style.display = "none";
+                    }
+                })
+            });
+
+            //COMMUNITY GUIDLINES --------------------------
+            let checkBtn = document.getElementById("check-rev");
+            checkBtn.addEventListener("click", function (e) {
+                let checkTxt = document.getElementById("wrt-area");
+                checkTxtVal = checkTxt.value.toUpperCase();
+                //console.log(checkTxt);
+
+                let notAllow = ["Dog", "3rd Class", "dustbin"];
+                for (let i = 0; i < notAllow.length; i++) {
+                    if (checkTxtVal.includes(notAllow[i].toUpperCase())) {
+                        alert("Your review do not follows the community guidlines standard!")
+                        checkTxt.value = null;
+                        break;
+                    }
+                }
+            });
+        </script> -->

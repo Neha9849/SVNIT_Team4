@@ -1,6 +1,42 @@
 <%- include('partials/Navbar.ejs',{authenticated:authenticated}) %>
-   
-    <div class="category mt-5">
-     <h1>this is catgory page</h1>
-    </div>
-   
+    <style>
+        /* carousel */
+
+        #carousel {
+            margin-bottom: 150px;
+        }
+
+        .carousel-item {
+            height: 530px;
+        }
+
+        .carousel-inner>.item>img {
+            margin: 0 auto;
+        }
+    </style>
+    <section id="carousel">
+
+
+        <div class="bd-example">
+            <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleCaptions" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="/images/img1.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h1>LOOK NO FURTHER!</h1>
+                            <p>GET TOP DEALS AT LOW PRICE.</p>
+                        </div>
+                    </div>
+                   
+                  
+                </div>
+                
+            </div>
+        </div>
+       
+    </section>
